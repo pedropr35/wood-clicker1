@@ -5,20 +5,48 @@
 #iron,
 #upgradeIron,
 #ironWorker,
-#mineIron{
+#mineIron,
+#tradeStone,
+#tradeIron{
     display: none;
 }
 body {
-    background-color: #101010;
+    background: linear-gradient(
+        to bottom,
+        #111,
+        #1b1b1b
+
+    );
     text-align: center;
-    font-family:  Arial;
+    font-family:  Arial, Arial, Helvetica, sans-serif;
     color: white;
+    margin: 0;
+    padding: 20px;
+}
+h1{
+    font-size: 40px;
+    text-shadow: 
+    0 0 10px lime,
+    0 0 20px green;
+    margin-bottom: 30px;
+}
+h2{
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 15px;
+    width: 300px;
+    margin: 20px, auto;
+    box-shadow: 
+    0 0 15px rgba(255, 255, 255, 0.1);
+    
 }
 button{
-    padding: 10px;
-    margin: 5px;
-    border: none;
-    border-radius: 8px;
+    background-color: #222;
+    color: #ffffff;
+    padding: 12px 18px;
+    margin: 10px;
+    border: 2px solid #444;
+    border-radius: 12px;
     font-size: 16px;
     cursor: pointer;
     transition: 0,2s;
@@ -28,7 +56,44 @@ button{
 button:hover{
     transform: scale(1.08);
     box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.5);
+    border-color: white;
 }
 button:active{
     transform: scale(0.95);
+}
+
+#wood{
+    color: #7CFC00;
+    text-shadow: 0 0 10px #7CFC00;
+}
+
+#stone{
+    color: lightgray;
+    text-shadow: 0 0 10px gray;
+}
+
+#iron{
+    color: #c0c0c0;
+    text-shadow: silver;
+}
+
+#gold{
+    color: gold;
+
+    text-shadow: 
+    0 0 10px gold,
+    0 0 10px orange;
+}
+#tradeos{
+    color: gold;
+    text-shadow: 
+    0 0 10px gold,
+    0 0 20px orange;
+    margin-top: 50px;
+}
+#tradeWood,
+#tradeStone,
+#tradeIron{
+    background-color: #3a2a00;
+    border: 2px solid gold;
 }

@@ -11,6 +11,11 @@ const ironText = document.getElementById("iron");
 const upgradeTaladro = document.getElementById("upgradeIron");
 const ironWorker = document.getElementById("ironWorker");
 const mineIron = document.getElementById("mineIron");
+const goldText = document.getElementById("gold");
+const tradeWood = document.getElementById("tradeWood");
+const tradeStone = document.getElementById("tradeStone");
+const tradeIron = document.getElementById("tradeIron");
+let gold = 0;
 let wood = 0;
 let woodPerClick = 1;
 let upgradeCost = 10;
@@ -27,15 +32,19 @@ let upgradeIron = 25;
 let ironPerSecond = 0;
 let ironMiner = 50;
 function updateUi() {
-    woodText.innerText = `Madera ${Math.floor(wood)}`;
+    woodText.innerText = `Madera ${Math.floor(wood)}
+    (+${woodPerSecond}/s)`;
     upgradeButton.innerText = `Mejorar Hacha (${Math.floor(upgradeCost)})`;
     workButton.innerText = `Contratar Leñador (${Math.floor(workerCost)})`;
-    stoneText.innerText = `Piedra ${Math.floor(stone)}`;
+    stoneText.innerText = `Piedra ${Math.floor(stone)}
+    (+${stonePerSecond}/s)`;
     upgradePickaxe.innerText = `Mejorar Pico (${Math.floor(pickCost)})`;
     stoneWorker.innerText = `Contratar trabajador (${Math.floor(stoneWorkCost)})`;
-    ironText.innerText = `Hierro ${Math.floor(iron)}`;
+    ironText.innerText = `Hierro ${Math.floor(iron)}
+    (+${ironPerSecond}/s)`;
     upgradeTaladro.innerText = `Mejorar el Taladro (${Math.floor(upgradeIron)})`;
     ironWorker.innerText = `Contratar Minero (${Math.floor(ironMiner)})`;
+    goldText.innerText = `Oro = ${gold}`;
     if (wood < upgradeCost) {
         upgradeButton.style.backgroundColor = "red";
     }
@@ -53,6 +62,7 @@ function updateUi() {
         mineButton.style.display = "inline-block";
         upgradePickaxe.style.display = "inline-block";
         stoneWorker.style.display = "inline-block";
+        tradeStone.style.display = "inline-block";
     }
     if (stone < pickCost) {
         upgradePickaxe.style.backgroundColor = "red";
@@ -71,6 +81,7 @@ function updateUi() {
         upgradeTaladro.style.display = "inline-block";
         ironWorker.style.display = "inline-block";
         mineIron.style.display = "inline-block";
+        tradeIron.style.display = "inline-block";
     }
     if (iron < upgradeIron) {
         upgradeTaladro.style.backgroundColor = "red";
@@ -87,6 +98,9 @@ function updateUi() {
 }
 recolectarButton?.addEventListener("click", () => {
     wood += woodPerClick;
+    if (Math.random() < 0.05) {
+        gold++;
+    }
     updateUi();
 });
 upgradeButton?.addEventListener("click", () => {
@@ -100,7 +114,7 @@ upgradeButton?.addEventListener("click", () => {
 workButton?.addEventListener("click", () => {
     if (wood >= workerCost) {
         wood -= workerCost;
-        woodPerSecond++;
+        woodPerSecond += 3;
         workerCost *= 1.5;
         updateUi();
     }
@@ -108,6 +122,9 @@ workButton?.addEventListener("click", () => {
 mineButton?.addEventListener("click", () => {
     stone += stonePerClick;
     updateUi();
+    if (Math.random() < 0.05) {
+        gold++;
+    }
 });
 upgradePickaxe?.addEventListener("click", () => {
     if (stone >= pickCost) {
@@ -119,7 +136,7 @@ upgradePickaxe?.addEventListener("click", () => {
 });
 stoneWorker?.addEventListener("click", () => {
     if (stone >= stoneWorkCost) {
-        stonePerSecond++;
+        stonePerSecond += 3;
         stone -= stoneWorkCost;
         stoneWorkCost *= 1.5;
         updateUi();
@@ -127,6 +144,9 @@ stoneWorker?.addEventListener("click", () => {
 });
 mineIron?.addEventListener("click", () => {
     iron += ironPerClick;
+    if (Math.random() < 0.05) {
+        gold++;
+    }
     updateUi();
 });
 upgradeTaladro?.addEventListener("click", () => {
@@ -139,9 +159,30 @@ upgradeTaladro?.addEventListener("click", () => {
 });
 ironWorker?.addEventListener("click", () => {
     if (iron >= ironMiner) {
-        ironPerSecond++;
+        ironPerSecond += 4;
         iron -= ironMiner;
         ironMiner *= 1.5;
+        updateUi();
+    }
+});
+tradeWood?.addEventListener("click", () => {
+    if (gold >= 5) {
+        gold -= 5;
+        wood += 100;
+        updateUi();
+    }
+});
+tradeStone?.addEventListener("click", () => {
+    if (gold >= 5) {
+        gold -= 5;
+        stone += 75;
+        updateUi();
+    }
+});
+tradeIron?.addEventListener("click", () => {
+    if (gold >= 8) {
+        gold -= 8;
+        iron += 50;
         updateUi();
     }
 });
@@ -150,6 +191,7 @@ function saveGame() {
         wood: wood,
         stone: stone,
         iron: iron,
+        gold: gold,
         woodPerClick: woodPerClick,
         stonePerClick: stonePerClick,
         ironPerClick: ironPerClick,
@@ -172,6 +214,7 @@ function loadGame() {
         wood = saveData.wood;
         stone = saveData.stone;
         iron = saveData.iron;
+        gold = saveData.gold || 0;
         woodPerClick = saveData.woodPerClick;
         stonePerClick = saveData.stonePerClick;
         ironPerClick = saveData.ironPerClick;
