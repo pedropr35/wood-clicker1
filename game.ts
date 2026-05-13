@@ -15,6 +15,15 @@ const tradeWood = document.getElementById("tradeWood");
 const tradeStone = document.getElementById("tradeStone");
 const tradeIron = document.getElementById("tradeIron");
 const reset = document.getElementById("reset");
+const gambleInput = document.getElementById("gambleInput") as HTMLInputElement;
+const gambleWood = document.getElementById("gambleWood");
+const gambleMesagge = document.getElementById("gambleMessage");
+const gambleStone = document.getElementById("gambleStone");
+const gambleIron = document.getElementById("gambleIron");
+const mainGame = document.getElementById("mainGame");
+const gambling = document.getElementById("gambling");
+const openGambling = document.getElementById("openGambling");
+const backButton = document.getElementById("backButton");
 
 let gold = 0;
 let wood = 0;
@@ -203,6 +212,78 @@ tradeIron?.addEventListener("click", () => {
         gold -= 8;
         iron += 750;
         updateUi()
+    }
+})
+openGambling?.addEventListener("click", () => {
+    mainGame!.style.display = "none";
+    gambling!.style.display = "flex";
+})
+backButton?.addEventListener("click", () => {
+    gambling!.style.display = "none";
+    mainGame!.style.display = "";
+})
+
+gambleWood?.addEventListener("click", () => {
+    const amount = Number(gambleInput.value);
+    if (wood >= amount && amount > 0){
+        wood -= amount;
+
+        const chance = Math.random();
+        if (chance < 0.15){
+            wood += amount * 3;
+            gambleMesagge!.innerText = "🔥 GANASTE EL TRIPLE";
+            gambleMesagge!.style.color = "gold";
+
+        } else if (chance < 0.50){
+            wood += amount * 2;
+            gambleMesagge!.innerText = "😄 Ganaste el doble";
+            gambleMesagge!.style.color = "lightgreen";
+        } else {
+            gambleMesagge!.innerText = "Perdiste!!";
+            gambleMesagge!.style.color = "red";
+        }
+    }
+})
+gambleStone?.addEventListener("click", () => {
+    const amount = Number(gambleInput.value);
+    if (stone >= amount && amount > 0){
+        stone -= amount;
+
+        const chance = Math.random();
+        if (chance < 0.15){
+            stone += amount * 3;
+            gambleMesagge!.innerText = "🔥 GANASTE EL TRIPLE";
+            gambleMesagge!.style.color = "gold";
+
+        } else if (chance < 0.50){
+            stone += amount * 2;
+            gambleMesagge!.innerText = "😄 Ganaste el doble";
+            gambleMesagge!.style.color = "lightgreen";
+        } else {
+            gambleMesagge!.innerText = "Perdiste!!";
+            gambleMesagge!.style.color = "red";
+        }
+    }
+})
+gambleIron?.addEventListener("click", () => {
+    const amount = Number(gambleInput.value);
+    if (iron >= amount && amount > 0){
+        iron -= amount;
+
+        const chance = Math.random();
+        if (chance < 0.15){
+            iron += amount * 3;
+            gambleMesagge!.innerText = "🔥 GANASTE EL TRIPLE";
+            gambleMesagge!.style.color = "gold";
+
+        } else if (chance < 0.50){
+            iron += amount * 2;
+            gambleMesagge!.innerText = "😄 Ganaste el doble";
+            gambleMesagge!.style.color = "lightgreen";
+        } else {
+            gambleMesagge!.innerText = "Perdiste!!";
+            gambleMesagge!.innerText = "red";
+        }
     }
 })
 

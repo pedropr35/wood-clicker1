@@ -9,6 +9,7 @@
     </head>
 
     <body>
+        <div id="mainGame">
         <h1>🌲 Wood Clicker</h1>
         <h2 id="wood">Madera = 0</h2>
         <button id="recolectarButton">
@@ -46,8 +47,29 @@
         <button id="tradeStone">5 de oro = 1000 de piedra</button>
         <button id="tradeIron">8 de oro = 750 de Hierro</button>
 
-
+        <button id="openGambling">Entrar a las Apuestas</button>
         <button id="reset">Reiniciar progreso</button>
+
+        </div>
+
+        <div id="gambling">
+            <h1>🕯️ El Comerciante</h1>
+
+            <input id="gambleInput" type="number" name="Cuanto quieres Apostar">
+            <p id="gambleMessage"></p>
+            <button id="gambleWood">
+            Cuanta Madera quieres apostar?    
+            </button>
+            <button id="gambleStone">
+                Cuanta piedra quieres apostar?
+            </button>
+            <button id="gambleIron">
+                Cuanta Hierro queres apostar?
+            </button>
+            
+            <button id="backButton">Volver al Clicker</button>
+        </div>
+
         <script src="game.js"></script>
     </body>
 </html>
