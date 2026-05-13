@@ -162,6 +162,60 @@ ironWorker?.addEventListener("click", () => {
     }
 
 })
+function saveGame (){
+    const saveData ={
+        wood: wood,
+        stone: stone,
+        iron: iron,
+        woodPerClick: woodPerClick,
+        stonePerClick: stonePerClick,
+        ironPerClick: ironPerClick,
+        woodPerSecond: woodPerSecond,
+        stonePerSecond: stonePerSecond,
+        ironPerSecond: ironPerSecond,
+        upgradeCost: upgradeCost,
+        workerCost: workerCost,
+
+        pickCost: pickCost,
+        stoneWorkCost: stoneWorkCost,
+        upgradeIron: upgradeIron,
+        ironMiner: ironMiner
+    };
+    localStorage.setItem(
+        "save",
+        JSON.stringify(saveData)
+    );
+}
+function loadGame(){
+    const savedGame = localStorage.getItem("save");
+    if (savedGame){
+        const saveData = JSON.parse(savedGame);
+        wood = saveData.wood;
+
+        stone = saveData.stone;
+
+        iron = saveData.iron;
+
+        woodPerClick = saveData.woodPerClick;
+
+        stonePerClick = saveData.stonePerClick;
+
+        ironPerClick = saveData.ironPerClick;
+
+        woodPerSecond = saveData.woodPerSecond;
+
+        stonePerSecond = saveData.stonePerSecond;
+
+        ironPerSecond = saveData.ironPerSecond;
+        upgradeCost = saveData.upgradeCost || 10;
+        workerCost = saveData.workerCost || 25;
+        pickCost = saveData.pickCost || 10;
+        stoneWorkCost = saveData.stoneWorkCost || 25;
+        upgradeIron = saveData.upgradeIron || 25;
+        ironMiner = saveData.ironMiner || 50;
+    }
+}
+
 setInterval(() =>{
 
     wood += woodPerSecond;
@@ -171,5 +225,9 @@ setInterval(() =>{
     updateUi()
 
 }, 1000)
+setInterval(() => {
+    saveGame()
+}, 5000);
 
+loadGame()
 updateUi()
